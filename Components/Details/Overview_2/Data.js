@@ -15,7 +15,7 @@ export default class Content extends Component{
                marginTop: 10,
                justifyContent: 'space-around',
                borderColor: 'red',
-               borderWidth: (danGer)? 3:0
+               borderWidth: (danGer)? 4:0
             }}>
             <Text
                style={{

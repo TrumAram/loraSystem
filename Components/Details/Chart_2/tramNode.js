@@ -9,14 +9,14 @@ const chRong = Dimensions.get('window').width;
 export default class Node extends Component{
    
    render(){
-      const {number, nhietDo, doAm, time} = this.props;
+      const {number, nhietDo, doAm, time, date} = this.props;
       const Decorator = ({ x, y, data }) => {
          return data.map((value, index) => (
              <Circle
                  key={ index }
                  cx={ x(index) }
                  cy={ y(value) }
-                 r={ 2 }
+                 r={ 3 }
                  stroke={ 'rgb(134, 65, 244)' }
                  fill={ 'white' }
              />
@@ -35,12 +35,13 @@ export default class Node extends Component{
                   contentInset={{ top: 10, bottom: 10 }}
                   svg={{ fontSize: 10, fill: 'black' }}
                />
-               <ScrollView horizontal = {'true'} ref={'content'}>
+               <ScrollView horizontal = {true} ref={'content'}>
+                  <View>
                      <BarChart
-                        style={{height: chCao*0.3, width: chRong*1.4}}
+                        style={{height: chCao*0.3, width: time.length>12? chRong*2.2: chRong*1.2}}
                         data={ nhietDo }
                         svg={{ fill: 'rgba(0, 0, 255, 0.6)'}}
-                        spacingInner = {0.4}
+                        spacingInner = {0.3}
                         gridMin={0}
                         gridMax={50}
                         contentInset={{ top: 10, bottom: 10 }}
@@ -49,24 +50,26 @@ export default class Node extends Component{
                         {/* <Decorator/> */}
                      </BarChart>
                      <LineChart
-                        style={{...StyleSheet.absoluteFill, width: chRong*1.4}}
+                        style={{...StyleSheet.absoluteFill, 
+                           height: chCao*0.3, width: time.length>12? chRong*2.2: chRong*1.2}}
                         data={ doAm }
-                        svg={{ stroke: 'rgb(255, 0, 0)', strokeWidth: 2}}
+                        svg={{ stroke: 'rgb(255, 0, 0)', strokeWidth: 3}}
                         gridMin={0}
                         gridMax={100}
                         curve={shape.curveNatural}
                         contentInset={{ top: 10, bottom: 10, left: 15, right: 15 }}
                      >
-                        {/* <Decorator/> */}
+                        <Decorator/>
                      </LineChart>
 
                      <XAxis
-                        style={{width: chRong*1.4, paddingTop:10}}
+                        style={{width: time.length>12? chRong*2.2: chRong*1.2, paddingTop:10}}
                         data={ time }
                         formatLabel = { (val, ind) => time[ind] }
                         svg={{ fontSize: 10, fill: 'black' }}
-                        contentInset= {{left: 15, right: 15}}
+                        contentInset= {{left: date? 30:15, right: date? 30:15}}
                      />
+                  </View>
                </ScrollView>
                <YAxis
                   style={{height: chCao*0.3}}
@@ -80,9 +83,9 @@ export default class Node extends Component{
       )
    }
    componentDidMount() {
-      // setTimeout(() => {
-      //    this.refs.content.scrollToEnd();
-      // }, 50);
+      setTimeout(() => {
+         this.refs.content.scrollToEnd();
+      }, 50);
 
       // this.dulieu.ref('nhiet do').on('value', (snap)=> {
       //    this.setState({

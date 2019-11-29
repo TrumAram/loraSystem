@@ -53,11 +53,19 @@ export default class login extends Component{
       })
    }
    clickNhietdo = () =>{
-      firebaseApp.database().ref('r3NPCRAbzRZBnda8wAvMh76Kygn2').child('Gateway 1').child('Node 1').child('By hour').push({
+      firebaseApp.database().ref('r3NPCRAbzRZBnda8wAvMh76Kygn2').child('Gateway 1').child('Node 1').child('By hour')
+      .child(`${new Date().getDate()-1}-${new Date().getMonth()+1}-${(new Date().getFullYear())}`).push({
          nhietDo: Date.now()%25 + 20,
-         doAm: Date.now()%25 + 55,
-         date: ((new Date().getFullYear())%100)*10000+(new Date().getMonth()+1)*100+(new Date().getDate()),
+         doAm: Date.now()%25 + 40,
+         // date: ((new Date().getFullYear())%100)*10000+(new Date().getMonth()+1)*100+(new Date().getDate()),
          time: `${new Date().getHours()}:${new Date().getMinutes()}`
+      })
+   }
+   clickDate = () =>{
+      firebaseApp.database().ref('r3NPCRAbzRZBnda8wAvMh76Kygn2').child('Gateway 1').child('Node 1').child('By date').push({
+         nhietDo: Date.now()%25 + 20,
+         doAm: Date.now()%25 + 40,
+         time: `${new Date().getDate()}/${new Date().getMonth()+1}/${(new Date().getFullYear())%100}`
       })
    }
    
@@ -117,7 +125,7 @@ export default class login extends Component{
             </View>
             {/*--------------------------------------------------------------------------------*/}
             <View style={loginstyle.fbgg}>
-               <TouchableOpacity style={loginstyle.fbbutton}>
+               <TouchableOpacity style={loginstyle.fbbutton} onPress={this.clickDate}>
                      <Image source={require('./img/iconfb.png')} style={{width:30, height:30}}/>
                      <Text style={{color: 'white', marginLeft: 10}}>Facebook</Text>
                </TouchableOpacity>
