@@ -9,7 +9,8 @@ const chRong = Dimensions.get('window').width;
 export default class Node extends Component{
    
    render(){
-      const {number, nhietDo, doAm, time, date} = this.props;
+      const {number, nhietDo, doAm, time} = this.props;
+      var w = time==null? chRong: (time.length>12? chRong*2.2: chRong*1.2);
       const Decorator = ({ x, y, data }) => {
          return data.map((value, index) => (
              <Circle
@@ -38,7 +39,7 @@ export default class Node extends Component{
                <ScrollView horizontal = {true} ref={'content'}>
                   <View>
                      <BarChart
-                        style={{height: chCao*0.3, width: time.length>12? chRong*2.2: chRong*1.2}}
+                        style={{height: chCao*0.3, width: w}}
                         data={ nhietDo }
                         svg={{ fill: 'rgba(0, 0, 255, 0.6)'}}
                         spacingInner = {0.3}
@@ -51,7 +52,7 @@ export default class Node extends Component{
                      </BarChart>
                      <LineChart
                         style={{...StyleSheet.absoluteFill, 
-                           height: chCao*0.3, width: time.length>12? chRong*2.2: chRong*1.2}}
+                           height: chCao*0.3, width: w}}
                         data={ doAm }
                         svg={{ stroke: 'rgb(255, 0, 0)', strokeWidth: 3}}
                         gridMin={0}
@@ -63,11 +64,11 @@ export default class Node extends Component{
                      </LineChart>
 
                      <XAxis
-                        style={{width: time.length>12? chRong*2.2: chRong*1.2, paddingTop:10}}
+                        style={{width: w, paddingTop:10}}
                         data={ time }
                         formatLabel = { (val, ind) => time[ind] }
                         svg={{ fontSize: 10, fill: 'black' }}
-                        contentInset= {{left: date? 30:15, right: date? 30:15}}
+                        contentInset= {{left: 15, right: 15}}
                      />
                   </View>
                </ScrollView>
@@ -85,7 +86,7 @@ export default class Node extends Component{
    componentDidMount() {
       setTimeout(() => {
          this.refs.content.scrollToEnd();
-      }, 50);
+      }, 100);
 
       // this.dulieu.ref('nhiet do').on('value', (snap)=> {
       //    this.setState({

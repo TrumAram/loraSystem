@@ -7,6 +7,11 @@ import {firebaseApp} from "../Firebase/FBConfig";
 import loginstyle from './styles/loginstyle';
 import SplashScreen from 'react-native-splash-screen';
 
+const date = new Date().getDate();
+var d = date<10? '0'+date: date;
+const month = new Date().getMonth()+1;
+var m = month<10? '0'+month: month;
+const y = new Date().getFullYear();
 export default class login extends Component{
    static navigationOptions={ header: null };
    state={
@@ -52,22 +57,15 @@ export default class login extends Component{
          eye: (this.state.isSecure)? require('./img/non-eye.png') : require('./img/eye.png')
       })
    }
-   clickNhietdo = () =>{
-      firebaseApp.database().ref('r3NPCRAbzRZBnda8wAvMh76Kygn2').child('Gateway 1').child('Node 1').child('By hour')
-      .child(`${new Date().getDate()-1}-${new Date().getMonth()+1}-${(new Date().getFullYear())}`).push({
-         nhietDo: Date.now()%25 + 20,
-         doAm: Date.now()%25 + 40,
-         // date: ((new Date().getFullYear())%100)*10000+(new Date().getMonth()+1)*100+(new Date().getDate()),
+   clickNhietdo = (str) =>{
+      firebaseApp.database().ref('r3NPCRAbzRZBnda8wAvMh76Kygn2').child('Gateway 1').child(`${str}`).child('By hour')
+      .child(`${d}-${m}-${y}`).push({
+         nhietDo: Date.now()%15 + 23,
+         doAm: Date.now()%15 + 43,
          time: `${new Date().getHours()}:${new Date().getMinutes()}`
       })
    }
-   clickDate = () =>{
-      firebaseApp.database().ref('r3NPCRAbzRZBnda8wAvMh76Kygn2').child('Gateway 1').child('Node 1').child('By date').push({
-         nhietDo: Date.now()%25 + 20,
-         doAm: Date.now()%25 + 40,
-         time: `${new Date().getDate()}/${new Date().getMonth()+1}/${(new Date().getFullYear())%100}`
-      })
-   }
+   
    
    render(){
       const {navigate} = this.props.navigation;
@@ -125,15 +123,18 @@ export default class login extends Component{
             </View>
             {/*--------------------------------------------------------------------------------*/}
             <View style={loginstyle.fbgg}>
-               <TouchableOpacity style={loginstyle.fbbutton} onPress={this.clickDate}>
-                     <Image source={require('./img/iconfb.png')} style={{width:30, height:30}}/>
-                     <Text style={{color: 'white', marginLeft: 10}}>Facebook</Text>
+               {/* <TouchableOpacity style={loginstyle.fbbutton} onPress={()=>this.clickNhietdo('Node 1')}>
+                  <Text style={{color: 'white'}}>Facebook</Text>
                </TouchableOpacity>
 
-               <TouchableOpacity style={loginstyle.fbbutton} onPress={this.clickNhietdo}>
-                     <Image source={require('./img/icongg.png')} style={{width:30, height:30}}/>
-                     <Text style={{color: 'white', marginLeft: 10}}>Google</Text>
-               </TouchableOpacity>
+               <TouchableOpacity style={loginstyle.fbbutton} onPress={()=>this.clickNhietdo('Node 2')}>
+                  <Text style={{color: 'white'}}>Google</Text>
+               </TouchableOpacity> */}
+               <Text
+                  style={{
+                     color: 'white', marginTop: '50%', 
+                     fontFamily: 'serif', fontSize: 17, fontWeight: 'bold'}}
+                  >Hãy bảo vệ rừng vì hành tinh xanh</Text>
             </View>
          </ImageBackground>
       )

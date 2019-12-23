@@ -15,7 +15,7 @@ export default class MyModal extends Component{
             style={{ width: 300, height: 500, padding: 10 }}>
             
             <Image source={this.props.avatarSource}
-                  style={{width: 280, height: 280, marginBottom: 10}}/>
+                  style={{width: 280, height: 280, marginBottom: 10}} resizeMode={'contain'}/>
             <View style={{flex: 1, justifyContent: 'space-around'}}>
                <View style={userstyle.modalInfo}>
                   <Image source={require('../../img/User/user.png')} style={{width:25, height:25}}/>

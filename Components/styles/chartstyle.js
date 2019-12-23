@@ -23,7 +23,7 @@ const chartstyle= StyleSheet.create({
         flexDirection: 'row',
         paddingHorizontal: 10,
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     },
     chuThich:{
         height:30, 

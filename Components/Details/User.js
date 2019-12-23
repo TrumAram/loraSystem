@@ -5,7 +5,6 @@ import { firebaseApp } from '../../Firebase/FBConfig'
 import userstyle from '../styles/userstyle'
 import ImageResizer from 'react-native-image-resizer'
 import MyModal from './User_2/MyModalBox'
-import Setting from './User_2/Setting'
 import NoConnection from '../ConnectionStatus';
 
 const options = {
@@ -117,7 +116,7 @@ export default class user extends Component{
             <View style={{flex:1, backgroundColor:'rgb(228,228,228)'}}>
                <TouchableOpacity style={userstyle.personal} onPress={this.showModal}>
                   <TouchableOpacity onPress={this.pickImage}>
-                     <Image source={this.state.avatarSource} style={userstyle.avatar}/>
+                     <Image source={this.state.avatarSource} style={userstyle.avatar} resizeMode={'contain'}/>
                   </TouchableOpacity>
                   <Text style={{marginLeft:15, fontSize:18, color: '#000'}}>
                      {this.state.name}
@@ -125,18 +124,15 @@ export default class user extends Component{
                </TouchableOpacity>
                {/* ----------------------------  Details  ----------------------------------- */}
                <View style={userstyle.content}>
-                  <TouchableOpacity style={userstyle.detail}>  
-                     <Image source={require('../img/User/icon3.png')} style={userstyle.icon}/>
-                     <Text style={userstyle.text}>Gateway 2</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={userstyle.detail}>           
-                     <Image source={require('../img/User/icon3.png')} style={userstyle.icon}/>
-                     <Text style={userstyle.text}>Gateway 3</Text>             
+                  
+                  <TouchableOpacity style={userstyle.detail} onPress = {()=> this.props.navigation.navigate('timKiem')}>           
+                     <Image source={require('../img/User/search.png')} style={userstyle.icon}/>
+                     <Text style={userstyle.text}>Tìm kiếm</Text>             
                   </TouchableOpacity>
                           
-                  <TouchableOpacity style={userstyle.detail} onPress = {()=> this.props.navigation.navigate('lichSu')}>
+                  <TouchableOpacity style={userstyle.detail} onPress = {()=> this.props.navigation.navigate('ghiChu')}>
                      <Image source={require('../img/User/history.png')} style={userstyle.icon}/>
-                     <Text style={userstyle.text}>Lịch sử</Text>
+                     <Text style={userstyle.text}>Ghi chú</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={userstyle.detail} onPress={this.hoTro}>
                      <Image source={require('../img/User/hotro.png')} style={userstyle.icon}/>

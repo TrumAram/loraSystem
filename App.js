@@ -7,7 +7,8 @@ import overview from "./Components/Details/Overview";
 import chart from "./Components/Details/Chart";
 import map from './Components/Details/Map'
 import user from "./Components/Details/User";
-import History from './Components/Details/User_2/History'
+import Advices from './Components/Details/User_2/Advices'
+import Note from './Components/Details/User_2/Note'
 import Setting from './Components/Details/User_2/Setting'
 console.disableYellowBox = true
 
@@ -58,13 +59,20 @@ const House= createStackNavigator({
       })
    },
    quenMatkhau: ResetPassword,
-   lichSu: {
-      screen: History,
+   timKiem: {
+      screen: Advices,
       navigationOptions: ()=> ({
-         headerTitle: 'Lịch sử',
+         headerTitle: 'Tìm kiếm',
          headerStyle:{
-            color: '#fff'
-         },
+            height: 50,
+            backgroundColor: 'rgba(130,130,0,0.5)',
+         }
+      }),
+   },
+   ghiChu: {
+      screen: Note,
+      navigationOptions: ()=> ({
+         headerTitle: 'Ghi chú',
          headerStyle:{
             height: 50,
             backgroundColor: 'rgba(130,130,0,0.5)',

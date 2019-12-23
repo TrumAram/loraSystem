@@ -10,7 +10,7 @@ const loginstyle= StyleSheet.create({
         height:'75%'
     },
     wraptext:{
-        flex:4,
+        flex: 5,
         width: '90%',
     },
     text1:{
@@ -49,13 +49,9 @@ const loginstyle= StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'flex-end',
     },
     fbbutton:{
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 80,
-        padding: 4,
+        height: 40,
         borderColor: '#fff',
         borderWidth:1
     },

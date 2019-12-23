@@ -19,6 +19,7 @@ export default class overview extends Component {
    state={
       nhietDo: [],
       doAm: [],
+      battery: [],
       numberOfNode: null,
       isConnected: true,
       nhietDoThresh: 100,
@@ -30,7 +31,7 @@ export default class overview extends Component {
    render() {
       var item = [];
       var danGer = 0
-      const {nhietDo, doAm, nhietDoThresh, doAmThresh} = this.state
+      const {nhietDo, doAm, nhietDoThresh, doAmThresh, battery} = this.state
       for(var i = 1; i<=this.state.numberOfNode ; i++){
          const node = i;
          danGer = (nhietDo[i]>nhietDoThresh || doAm[i]<doAmThresh) || danGer;  // check warning
@@ -44,6 +45,7 @@ export default class overview extends Component {
                   doAm = {doAm[i]}
                   nhietDoThresh = {nhietDoThresh}
                   doAmThresh = {doAmThresh}
+                  battery = {battery[i]}
                />
             </TouchableOpacity>
          )
@@ -110,6 +112,12 @@ export default class overview extends Component {
       })
       Database.ref(`${userID}`).child('Threshold').child('doAm').on('value', snap=>{
          this.setState({ doAmThresh: snap.val() })
+      })
+      //----------------------------Battery------------------------------------
+      Database.ref(`${userID}`).child('Gateway 1').child('Battery').on('value', (snap)=>{
+         this.setState({
+            battery: [...snap.val()]
+         })
       })
    }
 }
