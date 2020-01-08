@@ -57,14 +57,14 @@ export default class login extends Component{
          eye: (this.state.isSecure)? require('./img/non-eye.png') : require('./img/eye.png')
       })
    }
-   clickNhietdo = (str) =>{
-      firebaseApp.database().ref('r3NPCRAbzRZBnda8wAvMh76Kygn2').child('Gateway 1').child(`${str}`).child('By hour')
-      .child(`${d}-${m}-${y}`).push({
-         nhietDo: Date.now()%15 + 23,
-         doAm: Date.now()%15 + 43,
-         time: `${new Date().getHours()}:${new Date().getMinutes()}`
-      })
-   }
+   // clickNhietdo = (str) =>{
+   //    firebaseApp.database().ref('r3NPCRAbzRZBnda8wAvMh76Kygn2').child('Gateway 1').child(`${str}`).child('By hour')
+   //    .child(`${d}-${m}-${y}`).push({
+   //       nhietDo: Date.now()%10 + 27,
+   //       doAm: Date.now()%10 + 44,
+   //       time: `${new Date().getHours()-5}:${new Date().getMinutes()}`
+   //    })
+   // }
    
    
    render(){

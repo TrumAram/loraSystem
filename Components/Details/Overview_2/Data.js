@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import { Image, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
 
 export default class Content extends Component{
-
+   state={
+      border: '#fff',
+      bat: '#38e100'
+   }
    render(){
       const {number, nhietDo, doAm, nhietDoThresh, doAmThresh, battery} = this.props;
       const danGer = (nhietDo > nhietDoThresh) || (doAm < doAmThresh)
@@ -14,8 +17,8 @@ export default class Content extends Component{
                paddingHorizontal: 5,
                marginTop: 10,
                justifyContent: 'space-around',
-               borderColor: 'red',
-               borderWidth: (danGer)? 4:0
+               borderColor: danGer? this.state.border:'#fff',
+               borderWidth: 4
             }}>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                <Text style={{ color: '#000', fontSize: 22}}>Node {number}</Text>
@@ -27,7 +30,7 @@ export default class Content extends Component{
                         style={{
                            width:34, marginLeft:4, height: 19,
                            borderRadius:3, alignItems:'center',
-                           backgroundColor: battery > 40? '#38e100':'red'}}>
+                           backgroundColor: battery > 40? '#38e100':this.state.bat}}>
                         <Text style={{color: 'black', fontSize: 12}}>{battery}</Text>
                      </View>
                </ImageBackground>
@@ -48,5 +51,20 @@ export default class Content extends Component{
          </View>
       )
    }
-
+   componentDidMount(){
+      setInterval(()=>{
+         if(this.state.border=='#fff'){
+            this.setState({border: 'red'})
+         }else{
+            this.setState({border: '#fff'})
+         }
+      },700)
+      setInterval(()=>{
+         if(this.state.bat!='red'){
+            this.setState({bat: 'red'})
+         }else{
+            this.setState({bat: 'white'})
+         }
+      },700)
+   }
 }
